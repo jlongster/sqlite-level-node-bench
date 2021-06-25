@@ -10,10 +10,7 @@ function deleteDatabase() {
 
 function makeDatabase(num) {
   let db = new Database('db.sqlite');
-  db.exec(`
-    DROP TABLE IF EXISTS kv;
-    CREATE TABLE kv (key TEXT, value TEXT)
-  `);
+  db.exec('CREATE TABLE kv (key TEXT, value TEXT)');
 
   let stmt = db.prepare('INSERT INTO kv (key, value) VALUES (?, ?)');
   db.transaction(() => {

@@ -6,6 +6,9 @@ let { makeDatabase, deleteDatabase, loadAll } = require('./level');
 // `kv` table
 
 async function runBenchmark(num) {
+  // We populate the database once for each db size and do all
+  // benchmarks from it. There's no reason to re-populate it each time
+  // the benchmark runs
   global.db = await makeDatabase(num);
 
   let b = new Benchmark('leveldb', {
